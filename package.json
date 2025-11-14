@@ -1,0 +1,211 @@
+{
+  "name": "gemini-alt-generator",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "version": "1.0.0",
+  "publisher": "akky",
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akky709/gemini-alt-generator"
+  },
+  "bugs": {
+    "url": "https://github.com/akky709/gemini-alt-generator/issues"
+  },
+  "homepage": "https://note.com/akky709",
+  "keywords": [
+    "alt",
+    "alt-text",
+    "accessibility",
+    "a11y",
+    "seo",
+    "gemini",
+    "ai",
+    "image",
+    "video",
+    "aria-label"
+  ],
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "alt-generator.generateAlt",
+        "title": "%command.generateAlt%"
+      },
+      {
+        "command": "alt-generator.generateVideoAriaLabel",
+        "title": "%command.generateVideoAriaLabel%"
+      },
+      {
+        "command": "alt-generator.setApiKey",
+        "title": "%command.setApiKey%"
+      },
+      {
+        "command": "alt-generator.clearApiKey",
+        "title": "%command.clearApiKey%"
+      }
+    ],
+    "configuration": {
+      "properties": {
+        "altGenGemini.altGenerationMode": {
+          "order": 0,
+          "type": "string",
+          "default": "SEO",
+          "enum": [
+            "SEO",
+            "A11Y"
+          ],
+          "enumDescriptions": [
+            "%config.altGenerationMode.enum.seo%",
+            "%config.altGenerationMode.enum.a11y%"
+          ],
+          "enumItemLabels": [
+            "Search Engine",
+            "Accessibility"
+          ],
+          "description": "%config.altGenerationMode.description%",
+          "markdownDescription": "%config.altGenerationMode.markdownDescription%"
+        },
+        "altGenGemini.insertionMode": {
+          "order": 1,
+          "type": "string",
+          "default": "confirm",
+          "enum": [
+            "auto",
+            "confirm"
+          ],
+          "enumDescriptions": [
+            "%config.insertionMode.enum.auto%",
+            "%config.insertionMode.enum.confirm%"
+          ],
+          "enumItemLabels": [
+            "Auto",
+            "Manual"
+          ],
+          "description": "%config.insertionMode.description%",
+          "markdownDescription": "%config.insertionMode.markdownDescription%"
+        },
+        "altGenGemini.outputLanguage": {
+          "order": 2,
+          "type": "string",
+          "default": "auto",
+          "enum": [
+            "auto",
+            "ja",
+            "en"
+          ],
+          "enumItemLabels": [
+            "Auto",
+            "日本語",
+            "English"
+          ],
+          "description": "%config.outputLanguage.description%"
+        },
+        "altGenGemini.decorativeKeywords": {
+          "order": 3,
+          "type": "array",
+          "default": [
+            "icon-",
+            "bg-",
+            "deco-"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "%config.decorativeKeywords.description%",
+          "markdownDescription": "%config.decorativeKeywords.markdownDescription%"
+        },
+        "altGenGemini.videoDescriptionMode": {
+          "order": 4,
+          "type": "string",
+          "default": "summary",
+          "enum": [
+            "summary",
+            "transcript"
+          ],
+          "enumDescriptions": [
+            "%config.videoDescriptionMode.enum.summary%",
+            "%config.videoDescriptionMode.enum.transcript%"
+          ],
+          "enumItemLabels": [
+            "Summary",
+            "Transcript"
+          ],
+          "description": "%config.videoDescriptionMode.description%",
+          "markdownDescription": "%config.videoDescriptionMode.markdownDescription%"
+        },
+        "altGenGemini.contextAnalysisEnabled": {
+          "order": 5,
+          "type": "boolean",
+          "default": false,
+          "description": "%config.contextAnalysisEnabled.description%",
+          "markdownDescription": "%config.contextAnalysisEnabled.markdownDescription%"
+        },
+        "altGenGemini.customFilePath": {
+          "order": 6,
+          "type": "string",
+          "default": ".vscode/custom-prompts.md",
+          "description": "%config.customFilePath.description%",
+          "markdownDescription": "%config.customFilePath.markdownDescription%"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "alt-generator.generateAlt",
+        "key": "ctrl+alt+a",
+        "mac": "cmd+alt+a",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "alt-generator.generateVideoAriaLabel",
+        "key": "ctrl+alt+v",
+        "mac": "cmd+alt+v",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "alt-generator.generateAlt",
+          "group": "1_modification@1",
+          "when": "editorTextFocus"
+        },
+        {
+          "command": "alt-generator.generateVideoAriaLabel",
+          "group": "1_modification@2",
+          "when": "editorTextFocus"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/node-fetch": "^2.6.13",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.12"
+  }
+}

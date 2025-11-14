@@ -1,0 +1,196 @@
+/**
+ * Application constants
+ * Centralized location for all magic numbers and configuration values
+ */
+
+/**
+ * API and Network Configuration
+ */
+export const API_CONFIG = {
+    /** Default Gemini API model */
+    DEFAULT_MODEL: 'gemini-2.5-flash',
+    /** Maximum number of retry attempts for retryable errors */
+    MAX_RETRIES: 2,
+    /** Base wait time in milliseconds for retry (multiplied by attempt number) */
+    RETRY_WAIT_BASE_MS: 1000,
+    /** Maximum video file size in MB */
+    MAX_VIDEO_SIZE_MB: 20,
+} as const;
+
+/**
+ * Text Processing Configuration
+ */
+export const TEXT_PROCESSING = {
+    /** Maximum search range in characters for parent/sibling element detection */
+    MAX_SEARCH_RANGE: 5000,
+    /** Maximum number of parent element levels to traverse */
+    MAX_PARENT_LEVELS: 3,
+    /** Maximum number of sibling elements to collect (before + after) */
+    MAX_SIBLINGS: 3,
+    /** Minimum text length in characters to consider context sufficient */
+    MIN_CONTEXT_LENGTH: 50,
+    /** Maximum text length to prevent ReDoS attacks (500KB) */
+    MAX_TEXT_LENGTH: 500000,
+    /** Maximum HTML tag length to prevent ReDoS attacks */
+    MAX_TAG_LENGTH: 500,
+} as const;
+
+/**
+ * Tag Detection Configuration
+ */
+export const TAG_DETECTION = {
+    /** Timeout in milliseconds for tag search operations */
+    SEARCH_TIMEOUT_MS: 5000,
+    /** Maximum attribute length for regex matching */
+    MAX_ATTRIBUTE_LENGTH: 1000,
+} as const;
+
+/**
+ * Selection Thresholds
+ * Used to determine empty selections and minimum tag text length
+ */
+export const SELECTION_THRESHOLDS = {
+    /** Minimum selection length to be considered non-empty */
+    MIN_SELECTION_LENGTH: 5,
+    /** Minimum tag text length for detection */
+    MIN_TAG_TEXT_LENGTH: 10,
+} as const;
+
+/**
+ * Character Constraints for ALT Text Generation
+ * Used in prompts to constrain the length of generated descriptions
+ */
+export const CHAR_CONSTRAINTS = {
+    /** Standard length for English ALT text */
+    STANDARD_EN: '60-130 characters',
+    /** Detailed length for English ALT text */
+    DETAILED_EN: '100-200 characters',
+    /** Standard length for Japanese ALT text */
+    STANDARD_JA: '50-120 Japanese characters (full-width characters)',
+    /** Detailed length for Japanese ALT text */
+    DETAILED_JA: '100-200 Japanese characters (full-width characters)',
+    /** Default fallback constraint */
+    DEFAULT: '50-120 characters',
+} as const;
+
+/**
+ * Prompt Configuration
+ * Numbers used in prompt instructions
+ */
+export const PROMPT_CONSTRAINTS = {
+    /** Minimum number of SEO keywords */
+    SEO_KEYWORDS_MIN: 3,
+    /** Maximum number of SEO keywords */
+    SEO_KEYWORDS_MAX: 5,
+    /** Maximum characters for supplementary description when context partially describes */
+    MAX_SUPPLEMENTARY_CHARS: 50,
+    /** Maximum words for supplementary video description */
+    MAX_SUPPLEMENTARY_WORDS_VIDEO: 5,
+    /** Maximum words for video aria-label (summary mode) */
+    MAX_VIDEO_ARIA_LABEL_WORDS: 10,
+} as const;
+
+/**
+ * JSON Formatting
+ */
+export const JSON_FORMATTING = {
+    /** Indentation spaces for JSON.stringify */
+    INDENT_SPACES: 2,
+} as const;
+
+/**
+ * UI Messages
+ */
+export const UI_MESSAGES = {
+    /** Prefix for image progress messages */
+    IMAGE_PREFIX: '[IMG]',
+    /** Prefix for video progress messages */
+    VIDEO_PREFIX: '[VIDEO]',
+} as const;
+
+/**
+ * Context Range Values
+ * Mapping from configuration string to actual character count
+ */
+export const CONTEXT_RANGE_VALUES = {
+    'narrow': 500,
+    'standard': 1500,
+    'wide': 3000,
+    /** Default fallback value */
+    'default': 1500,
+} as const;
+
+/**
+ * Special Keywords
+ */
+export const SPECIAL_KEYWORDS = {
+    /** Keyword returned by API to indicate decorative/redundant content */
+    DECORATIVE: 'DECORATIVE',
+} as const;
+
+/**
+ * API Key Masking Configuration
+ */
+export const MASKING = {
+    /** Masked character for API key display */
+    MASK_CHAR: '••••••••',
+    /** Number of characters to show from end of API key (0 for maximum security) */
+    VISIBLE_CHARS: 4,
+    /** Minimum API key length to show last characters */
+    MIN_LENGTH_FOR_VISIBLE: 4,
+} as const;
+
+/**
+ * Batch Processing Configuration
+ */
+export const BATCH_PROCESSING = {
+    /** Number of items to process in each chunk for memory efficiency */
+    CHUNK_SIZE: 10,
+} as const;
+
+/**
+ * HTML Elements Configuration
+ */
+export const HTML_ELEMENTS = {
+    /** Common block-level and inline HTML tags for context extraction */
+    BLOCK_TAGS: ['div', 'section', 'article', 'main', 'aside', 'header', 'footer', 'nav', 'figure', 'li', 'td', 'th', 'p', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'figcaption', 'caption', 'span', 'a'] as const,
+} as const;
+
+/**
+ * Error Messages
+ */
+export const ERROR_MESSAGES = {
+    /** Editor errors */
+    NO_ACTIVE_EDITOR: '❌ No active editor',
+    EDITOR_CLOSED: 'Editor was closed during ALT generation. Please try again.',
+    DOCUMENT_EDIT_FAILED: 'Failed to edit document. The file may have been closed or modified.',
+
+    /** Tag detection errors */
+    NO_TAG_FOUND: '❌ No img or video tag found',
+    IMG_TAG_NOT_FOUND: '❌ img tag not found',
+    VIDEO_TAG_NOT_FOUND: '❌ video tag not found',
+    IMG_SRC_NOT_FOUND: '❌ img src not found',
+    VIDEO_SRC_NOT_FOUND: '❌ video src not found',
+    TAG_END_NOT_FOUND: '❌ {0} tag end not found',
+
+    /** File errors */
+    WORKSPACE_NOT_OPENED: '❌ Workspace not opened',
+    IMAGE_NOT_FOUND: '❌ Image not found: {0}',
+    VIDEO_NOT_FOUND: '❌ Video not found: {0}',
+    INVALID_FILE_PATH: '🚫 Invalid file path',
+
+    /** Format errors */
+    SVG_NOT_SUPPORTED: '🚫 SVG not supported. Convert to PNG/JPG first.',
+    VIDEO_TOO_LARGE: '❌ Video too large ({0}MB). Max {1}MB.',
+    DYNAMIC_SRC_NOT_SUPPORTED: '🚫 Dynamic src not supported: {0}',
+    INVALID_IMAGE_SOURCE: '🚫 Invalid image source: {0}',
+
+    /** API errors */
+    API_KEY_NOT_CONFIGURED: '🔑 API key not configured',
+    FETCH_IMAGE_FAILED: '❌ Failed to fetch image: {0}',
+    FETCH_IMAGE_ERROR: '❌ Error fetching image: {0}',
+
+    /** Other */
+    TAG_DETECTION_TIMEOUT: 'Tag detection timeout - text may be too complex',
+    SELECTION_TOO_LARGE: 'Selected text is too large for tag detection',
+} as const;

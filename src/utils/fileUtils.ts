@@ -1,0 +1,63 @@
+/**
+ * File and MIME type utilities
+ */
+
+import * as path from 'path';
+
+/**
+ * Get MIME type for image files based on extension
+ */
+export function getMimeType(filePath: string): string {
+    const ext = path.extname(filePath).toLowerCase();
+    const mimeTypes: { [key: string]: string } = {
+        '.jpg': 'image/jpeg',
+        '.jpeg': 'image/jpeg',
+        '.png': 'image/png',
+        '.gif': 'image/gif',
+        '.webp': 'image/webp',
+        '.bmp': 'image/bmp'
+    };
+    return mimeTypes[ext] || 'image/jpeg';
+}
+
+/**
+ * Get MIME type for video files based on extension
+ */
+export function getVideoMimeType(filePath: string): string {
+    const ext = path.extname(filePath).toLowerCase();
+    const mimeTypes: { [key: string]: string } = {
+        '.mp4': 'video/mp4',
+        '.webm': 'video/webm',
+        '.ogg': 'video/ogg',
+        '.mov': 'video/quicktime',
+        '.avi': 'video/x-msvideo'
+    };
+    return mimeTypes[ext] || 'video/mp4';
+}
+
+/**
+ * Get comment format based on file extension
+ * @param filePath - Path to the file
+ * @param content - Content to be commented
+ * @returns Formatted comment string
+ */
+export function getCommentFormat(filePath: string, content: string): string {
+    const ext = path.extname(filePath).toLowerCase();
+
+    switch (ext) {
+        case '.jsx':
+        case '.tsx':
+            // JSX/TSX: {/* comment */}
+            return `{/* ${content} */}`;
+
+        case '.php':
+            // PHP: <?php /* comment */ ?>
+            return `<?php /* ${content} */ ?>`;
+
+        case '.html':
+        case '.htm':
+        default:
+            // HTML and others: <!-- comment -->
+            return `<!-- ${content} -->`;
+    }
+}

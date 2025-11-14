@@ -1,0 +1,35 @@
+{
+  "displayName": "ALT Generator with Gemini",
+  "description": "Auto-generate ALT attributes for img tags using Gemini API (supports HTML/PHP/JSX/TSX with static paths)",
+
+  "command.generateAlt": "ALT Generator: Generate ALT for images",
+  "command.generateVideoAriaLabel": "ALT Generator: Generate ARIA-LABEL or transcript for videos",
+  "command.setApiKey": "ALT Generator: Set Gemini API Key",
+  "command.clearApiKey": "ALT Generator: Clear Gemini API Key",
+
+  "config.altGenerationMode.description": "ALT Generation Mode",
+  "config.altGenerationMode.markdownDescription": "[Image] Set what to prioritize when generating ALT text.",
+  "config.altGenerationMode.enum.seo": "SEO: Generate ALT text focused on search engine optimization (SEO)",
+  "config.altGenerationMode.enum.a11y": "A11Y: Generate ALT text focused on accessibility (A11Y) improvement",
+
+  "config.insertionMode.description": "Set how to insert generated text",
+  "config.insertionMode.markdownDescription": "Set how to insert generated text.",
+  "config.insertionMode.enum.auto": "Auto: Insert generated text automatically",
+  "config.insertionMode.enum.confirm": "Manual: Review generated text content before manual insertion",
+
+  "config.outputLanguage.description": "Set the language of generated text",
+
+  "config.decorativeKeywords.description": "Decorative Image Keywords",
+  "config.decorativeKeywords.markdownDescription": "If the filename contains these keywords, it will be identified as decorative and the ALT will be set to empty (`alt=\"\"`).",
+
+  "config.contextAnalysisEnabled.description": "Analyze surrounding text to prevent redundancy",
+  "config.contextAnalysisEnabled.markdownDescription": "Analyze surrounding text of images and videos. If already described by surrounding text, automatically sets `alt=\"\"` to prevent duplicate descriptions for screen readers.",
+
+  "config.videoDescriptionMode.description": "Video Description Mode",
+  "config.videoDescriptionMode.markdownDescription": "[Video] Set the detail level of generated text. Use transcript mode for creating text manuscripts for audio descriptions, etc.",
+  "config.videoDescriptionMode.enum.summary": "Summary: A concise label to identify what the video is before playing it",
+  "config.videoDescriptionMode.enum.transcript": "Transcript: A complete transcription including visual information to fully understand the video content",
+
+  "config.customFilePath.description": "Custom File Path",
+  "config.customFilePath.markdownDescription": "Path to a Markdown file for customizing Gemini prompts and API model. Specify as a relative path from the workspace root.  \n\n**Example:** `.vscode/custom-prompts.md`"
+}
